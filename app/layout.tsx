@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { QueryProvider } from "@/lib/providers/queryProvider";
 
 export const metadata: Metadata = {
   title: 'Payment Reconciliation Dashboard',
@@ -13,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col"><QueryProvider>{children}</QueryProvider></body>
     </html>
   );
 }
