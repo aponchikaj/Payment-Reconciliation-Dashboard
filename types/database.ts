@@ -37,28 +37,35 @@ export interface BankTransaction{
   updated_at:string
 }
 
-export interface Database{
+export interface Database {
   public:{
     Tables:{
       companies:{
-        Row:Company;
+        Row:{[K in keyof Company]:Company[K]}
         Insert:Omit<Company,'id'|'created_at'>&{id?:string;created_at?:string}
         Update:Partial<Omit<Company,'id'>>
+        Relationships:[]
       }
-      contracts: {
-        Row:Contract;
+      contracts:{
+        Row:{[K in keyof Contract]:Contract[K]}
         Insert:Omit<Contract,'id'|'created_at'>&{id?:string;created_at?:string}
         Update:Partial<Omit<Contract,'id'>>
+        Relationships: []
       }
       bank_transactions: {
-        Row: BankTransaction;
+        Row: { [K in keyof BankTransaction]: BankTransaction[K] }
         Insert:Omit<BankTransaction,'id'|'created_at'|'updated_at'>& {
           id?:string
           created_at?:string
           updated_at?:string;
         };
         Update:Partial<Omit<BankTransaction,'id'>>;
+        Relationships: []
       }
     }
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
+    CompositeTypes: Record<string, never>
   }
 }
